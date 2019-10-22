@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1></h1>
+    <h2></h2>
+    <p>
+        You are here:
+        <a href="#">Home</a>
+        <span>&#8227;</span>
+        <a href="#">Dive Into HTML5</a>
+        <span>&#8227;</span>
+    </p>
+    <h1>
+        <p class="large-p">№2.</p>
+        DETECTING HTML5 FEATURES
+    </h1>
+    <p id="table-content">
+        <a href="">show table of contents</a>
+    </p>
+    <p class="center leaf"></p>
+    <h2>
+        DIVING IN
+    </h2>
+    <p class="f">
+        You may well ask: “How can I start using HTML5 if older browsers don’t support it?” But the question itself is
+        misleading. HTML5 is not one big thing; it is a collection of individual features. So you can’t detect “HTML5
+        support,” because that doesn’t make any sense. But you can detect support for individual features, like canvas,
+        video, or geolocation.</p>
+    <br>
+    <p class="center leaf"></p>
+    <h2>DETECTION TECHNIQUES</h2>
+    <p>
+        When your browser renders a web page, it constructs a Document Object Model (DOM), a
+        collection of objects that represent the <abbr>HTML</abbr> elements on the page. Every element — every
+        <code>&lt;p&gt;</code>, every <code>&lt;div&gt;</code>, every <code>&lt;span&gt;</code> — is represented in the
+        <abbr>DOM</abbr> by a different object. (There are also global objects, like <code>window</code> and
+        <code>document</code>, that aren’t tied to specific elements.)</p>
+    <p class="ss" style="width:257px"><img src="openclipart.org_johnny_automatic_peeking_out_the_window.png" width="257"
+            height="436"></p>
+    <p>
+        All <abbr>DOM</abbr> objects share a set of common properties, but some objects have more than others. In
+        browsers that support <abbr>HTML5</abbr> features, certain objects will have unique properties. A quick peek at
+        the <abbr>DOM</abbr> will tell you which features are supported.</p>
+    <p>
+        There are four basic techniques for detecting whether a browser supports a particular feature. From simplest to
+        most complex:</p>
+    <ol>
+        <li>
+            <p>Check if a certain property exists on a global object (such as <code>window</code> or
+                <code>navigator</code>).</p>
+            <p>Example: <a href="#">testing for geolocation support</a></p>
+        </li>
+        <li>
+            <p>Create an element, then check if a certain property exists on that element.</p>
+            <p>Example: <a href="#">testing for canvas support</a></p>
+        </li>
+        <li>
+            <p>Create an element, check if a certain method exists on that element, then call the method and check the
+                value it returns.</p>
+            <p>Example: <a href="#">testing which video formats are supported</a></p>
+        </li>
+        <li>
+            <p>Create an element, set a property to a certain value, then check if the property has retained its value.</p>
+            <p>Example: <a href="#">testing which <code>&lt;input&gt;</code> types are supported</a></p>
+        </li>
+    </ol>
+    <p class="center leaf"></p>
+    <h2>MODERNIZR, AN HTML5 DETECTION LIBRARY</h2>
+    <p><a href="#">Modernizr</a> is an open source, <abbr>MIT</abbr>-licensed JavaScript library
+        that detects support for many <abbr>HTML5</abbr> <i>&amp;</i> <abbr>CSS3</abbr> features. You should
+        always use the latest version. To use it, include the following <code>&lt;script&gt;</code> element at the top
+        of your page.
+    </p>
+    <pre style="float:left">
+        <code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Dive Into HTML5&lt;/title&gt;
+<mark>&lt;script src="modernizr.min.js"&gt;&lt;/script&gt;</mark>
+&lt;/head&gt;
+&lt;body&gt;
+...
+&lt;/body&gt;
+&lt;/html&gt;
+        </code>
+    </pre>
+    <p class="legend right" style="margin-top:7em"><span class="arrow left-arrow"></span> It goes to your
+        &lt;head&gt;
+    </p>
+    <p class="clear">Modernizr runs automatically. There is no <code>modernizr_init()</code> function to call. When it
+        runs, it creates a global object called <code>Modernizr</code>, that contains a set of Boolean properties for
+        each feature it can detect. For example, if your browser supports the <a href="canvas.html">canvas
+            <abbr>API</abbr></a>, the <code>Modernizr.canvas</code> property will be <code>true</code>. If your browser
+        does not support the canvas <abbr>API</abbr>, the <code>Modernizr.canvas</code> property will be
+        <code>false</code>.
+    </p>
+    <pre>
+        <code>
+if (Modernizr.canvas) {
+    // let's draw some shapes!
+} else {
+    // no native canvas support available :(
+}
+        </code>
+    </pre>
+    <p class="center leaf"></p>
+    <h2>CANVAS</h2>
+    <p class="ss" style="width:300px">
+        <img src="openclipart.org_johnny_automatic_fishing_boat.png" width="300" height="203">
+        <br>
+        <span id="live-canvas">Your browser supports the canvas API.</span>
+    </p>
+    <p>
+        <abbr>HTML5</abbr> defines <a href="#">the
+            &lt;canvas&gt; element</a> as “a resolution-dependent bitmap canvas that can be used for rendering
+        graphs, game graphics, or other visual images on the fly.” A <dfn>canvas</dfn> is a rectangle in your page
+        where you can use JavaScript to draw anything you want. <abbr>HTML5</abbr> defines a set of functions (“the
+        canvas <abbr>API</abbr>”) for drawing shapes, defining paths, creating gradients, and applying
+        transformations.
+    </p>
+    <p>Checking for the canvas <abbr>API</abbr> uses <a href="#">detection technique #2</a>. If your browser
+        supports the canvas <abbr>API</abbr>, the <abbr>DOM</abbr> object it creates to represent a
+        <code>&lt;canvas&gt;</code> element will have a <a href="#"><code>getContext()</code>
+            method</a>. If your browser doesn’t support the canvas <abbr>API</abbr>, the <abbr>DOM</abbr> object it
+        creates for a <code>&lt;canvas&gt;</code> element will only have the set of common properties, but not anything
+        canvas-specific.
+    </p>
+    <pre>
+        <code>
+function supports_canvas() {
+    return !!document.createElement('canvas').getContext;
+}
+        </code>
+    </pre>
+    <p>This function starts by creating a dummy <code>&lt;canvas&gt;</code> element. But the element is never attached
+        to your page, so no one will ever see it. It’s just floating in memory, going nowhere and doing nothing, like a
+        canoe on a lazy river.
+    </p>
+    <pre><code>return !!document.<mark>createElement('canvas')</mark>.getContext;</code></pre>
+
+    <p>As soon as you create the dummy <code>&lt;canvas&gt;</code> element, you test for the presence of a
+        <code>getContext()</code> method. This method will only exist if your browser supports the canvas
+        <abbr>API</abbr>.
+    </p>
+    <pre><code>return !!document.createElement('canvas').<mark>getContext</mark>;</code></pre>
+
+    <p>Finally, you use the double-negative trick to force the result to a Boolean value (<code>true</code> or
+        <code>false</code>).
+    </p>
+    <pre><code>return <mark>!!</mark>document.createElement('canvas').getContext;</code></pre>
+
+    <p>This function will detect support for most of the canvas <abbr>API</abbr>, including <a href="#">shapes</a>, <a
+            href="#">paths</a>, <a href="#">gradients <i>&amp;</i> patterns</a>. It will not detect the
+        third-party <a href="#"><code>explorercanvas</code> library</a> that implements the canvas
+        <abbr>API</abbr> in Microsoft Internet Explorer.
+    </p>
+    <p>Instead of writing this function yourself, you can use <a href="#">Modernizr</a> to detect support for
+        the canvas <abbr>API</abbr>.
+    </p>
+    <p class="legend top" style="padding-left:6em">
+        <span class="arrow down-arrow"></span> check for canvas support
+    </p>
+    <pre>
+        <code>
+if (<mark>Modernizr.canvas</mark>) {
+    // let's draw some shapes!
+} else {
+    // no native canvas support available :(
+}
+    </code>
+    </pre>
+    <p>There is a separate test for the canvas text <abbr>API</abbr>, which I will demonstrate next.</p>
+
+    <p class="center leaf"></p>
+    <h2>MICRODATA</h2>
+    <p class="ss" style="width:305px"><img src="openclipart.org_johnny_automatic_divider_cards.png" width="305"
+            height="224">
+        <br>
+        <span></span>
+    </p>
+    <p><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#microdata">Microdata</a> is a
+        standardized way to provide additional semantics in your web pages. For example, you can use microdata to
+        declare that a photograph is available under a specific Creative Commons license. As you’ll see in <a
+            href="#">the distributed extensibility chapter</a>, you can use microdata to mark up an
+        “About Me” page. Browsers, browser extensions, and search engines can convert your <abbr>HTML5</abbr> microdata
+        markup into a <a href="http://en.wikipedia.org/wiki/VCard">vCard</a>, a standard format for sharing contact
+        information. You can also define your own microdata vocabularies.
+    </p>
+    <p>The <abbr>HTML5</abbr> microdata standard includes both <abbr>HTML</abbr> markup (primarily for search engines)
+        and a set of <abbr>DOM</abbr> functions (primarily for browsers). There’s no harm in including microdata markup
+        in your web pages. It’s nothing more than a few well-placed attributes, and search engines that don’t understand
+        the microdata attributes will just ignore them. But if you need to access or manipulate microdata through the
+        <abbr>DOM</abbr>, you’ll need to check whether the browser supports the microdata <abbr>DOM</abbr>
+        <abbr>API</abbr>.
+    </p>
+    <p>Checking for <abbr>HTML5</abbr> microdata <abbr>API</abbr> support uses <a href="#">detection technique
+            #1</a>. If your browser supports the <abbr>HTML5</abbr> microdata <abbr>API</abbr>, there will be a
+        <code>getItems()</code> function on the global <code>document</code> object. If your browser doesn’t support
+        microdata, the <code>getItems()</code> function will be undefined.
+    </p>
+    <pre>
+        <code>
+function supports_microdata_api() {
+    return !!document.getItems;
+}
+        </code>
+    </pre>
+    <p>Modernizr does not yet support checking for the microdata <abbr>API</abbr>, so you’ll need to use the function
+        like the one listed above.
+    </p>
+    <p class="center leaf"></p>
+    <h2>HISTORY <abbr>API</abbr></h2>
+    <p class="ss" style="float:left;margin:0 1.75em 1.75em 0;width:218px">
+        <img src="openclipart.org_johnny_automatic_demon_reading_Stewart_Orr.png" width="218" height="231">
+        <br>
+        <span></span>
+    </p>
+    <p>
+        The <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html"><abbr>HTML5</abbr>
+            history
+            <abbr>API</abbr></a> is a standardized way to manipulate the browser history via script. Part of this
+        <abbr>API</abbr> — navigating the history — has been available in previous versions of <abbr>HTML</abbr>. The
+        new part in <abbr>HTML5</abbr> is a way to add entries to the browser history, and respond when those entries
+        are removed from the stack by the user pressing the browser’s back button. This means that the <abbr>URL</abbr>
+        can continue to do its job as a unique identifier for the current resource, even in script-heavy applications
+        that don’t ever perform a full page refresh.
+    </p>
+    <p>Checking for <abbr>HTML5</abbr> history <abbr>API</abbr> support uses <a href="#">detection technique
+            #1</a>. If your browser supports the <abbr>HTML5</abbr> history <abbr>API</abbr>, there will be a
+        <code>pushState()</code> function on the global <code>history</code> object. If your browser doesn’t support the
+        history <abbr>API</abbr>, the <code>pushState()</code> function will be undefined.
+    </p>
+    <pre>
+        <code>
+function supports_history_api() {
+    return !!(window.history &amp;&amp; history.pushState);
+}
+        </code>
+    </pre>
+    <p>Instead of writing this function yourself, you can use <a href="#">Modernizr</a> (1.6 or later) to
+        detect support for the <abbr>HTML5</abbr> history <abbr>API</abbr>.
+    </p>
+    <p class="legend top" style="padding-left:6em">
+        <span class="arrow down-arrow"></span> check for history <abbr>API</abbr> support
+    </p>
+    <pre>
+        <code>
+if (<mark>Modernizr.history</mark>) {
+    // history management works!
+} else {
+    // no history support :(
+    // fall back to a scripted solution like <a href="https://github.com/balupton/History.js/">History.js</a>
+}
+        </code>
+    </pre>
+    <p class="center leaf"></p>
+    <h2>FURTHER READING</h2>
+    <p>Specifications and standards: </p>
+    <ul>
+        <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">the
+                <code>&lt;canvas&gt;</code> element</a>
+        </li>
+        <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/video.html#video">the
+                <code>&lt;video&gt;</code> element</a>
+        </li>
+        <li><a
+                href="http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#states-of-the-type-attribute"><code>&lt;input&gt;</code>
+                types</a>
+        </li>
+        <li><a
+                href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-input-element-attributes.html#the-placeholder-attribute">the
+                <code>&lt;input placeholder&gt;</code> attribute</a>
+        </li>
+        <li><a
+                href="http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html#autofocusing-a-form-control">the
+                <code>&lt;input autofocus&gt;</code> attribute</a>
+        </li>
+        <li><a href="http://dev.w3.org/html5/webstorage/"><abbr>HTML5</abbr> storage</a>
+        </li>
+        <li><a href="http://www.whatwg.org/specs/web-workers/current-work/">Web Workers</a>
+        </li>
+        <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/offline.html#offline">Offline web
+                applications</a>
+        </li>
+        <li><a href="http://www.w3.org/TR/geolocation-API/">Geolocation <abbr>API</abbr></a>
+        </li>
+        <li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/history.html">Session history and
+                navigation</a>
+        </li>
+    </ul>
+    <p>JavaScript libraries:</p>
+    <ul>
+        <li><a href="http://www.modernizr.com/">Modernizr</a>, an <abbr>HTML5</abbr> detection library</li>
+        <li><a href="http://code.google.com/p/geo-location-javascript/">geo.js</a>, a geolocation
+            <abbr>API</abbr>wrapper</li>
+        <li><a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills"><abbr>HTML5</abbr>Cross-browser
+                Polyfills</a></li>
+    </ul>
+    <p>Other articles and tutorials:</p>
+    <ul>
+        <li><a href="http://camendesign.com/code/video_for_everybody">Video for Everybody!</a></li>
+        <li><a href="http://diveintomark.org/tag/give">A gentle introduction to video encoding</a></li>
+        <li><a href="http://wiki.whatwg.org/wiki/Video_type_parameters">Video type parameters</a></li>
+        <li><a href="everything.html">The All-In-One Almost-Alphabetical Guide to Detecting Everything</a></li>
+        <li><a href="http://msdn.microsoft.com/en-us/ie/ff468705.aspx">Internet Explorer 9 Guide for Developers</a></li>
+    </ul>
+    <p class="center leaf"></p>
+    <p>This has been “Detecting <abbr>HTML5</abbr> Features.” The <a href="#">full table of
+            contents</a> has more if you’d like to keep reading.
+    </p>
+    <div class="html-facts">
+        <h4>Did You Know?</h4>
+        <div class="moneybags">
+            <blockquote>
+                <p>In association with Google Press, O’Reilly is distributing this book in a variety of formats,
+                    including paper, ePub, Mobi, and <abbr>DRM</abbr>-free <abbr>PDF</abbr>. The paid edition is called
+                    “HTML5: Up &amp; Running,” and it is available now. This chapter is included in the paid edition.
+                </p>
+                <p>If you liked this chapter and want to show your appreciation, you can <a
+                        href="http://www.amazon.com/HTML5-Up-Running-Mark-Pilgrim/dp/0596806027?ie=UTF8&amp;tag=diveintomark-20&amp;creativeASIN=0596806027">buy
+                        “HTML5: Up &amp; Running” with this affiliate link</a> or <a
+                        href="http://oreilly.com/catalog/9780596806033">buy an electronic edition directly from
+                        O’Reilly</a>. You’ll get a book, and I’ll get a buck. I do not currently accept direct
+                    donations.
+                </p>
+            </blockquote>
+        </div>
+    </div>
+</body>
+</html>
