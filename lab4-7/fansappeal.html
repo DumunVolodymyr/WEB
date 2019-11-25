@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="function.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a id="logo" class="navbar-brand" href="index.html">Dan Balan</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            For fans
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Fan club</a>
+                            <a class="dropdown-item" href="tourschedule.html">Tour schedule</a>
+                            <a class="dropdown-item" href="#">Lyrics</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="fansappeal.html">Fans appeal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="concertvenue.html">Concert venue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <br><br><br>
+        <h2 class="text-center">Зверненя фанів</h2><br>
+        <div class="container" id="comment-field">
+        </div>
+        <br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <br><button type="button" class="btn btn-dark pull-left" id="comment-add">Надіслати</button>
+                </div>
+                <div class="col-md-9">
+                    <textarea class="form-control" rows="6" placeholder="Написати звернення..."
+                        id="comment-body"></textarea>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <script src="jquery-3.3.1.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script type="text/javascript">
+            let comments = [];
+            loadComments();
+            document.getElementById('comment-add').onclick = function () {
+                let commentBody = document.getElementById('comment-body');
+                let comment = {
+                    body: commentBody.value,
+                    time: Math.floor(Date.now() / 1000)
+                }
+                if (commentBody.value == '') { alert("Заповніть поле коментаря"); }
+                else if (commentBody.value == 0) { alert("Коментар не може містити пробіли"); } else {
+                    commentBody.value = '';
+                    comments.push(comment);
+                    saveComments();
+                    showComments();
+                };
+            }
+        </script>
+
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

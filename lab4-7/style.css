@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  background-image: url("https://image.shutterstock.com/image-photo/music-background-piano-keys-grunge-260nw-73973452.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+  #logo {
+    animation-name: logoanim;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes logoanim {
+    0%   { opacity: 0; }
+    25%  { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+  .balan-background {
+      height: 500px;
+      line-height: 500px;
+      background-image: url("https://i.ytimg.com/vi/01YK-trNaMs/maxresdefault.jpg");
+      background-size: cover;
+      text-align: center;
+      color: white;
+  }
+  
+  .balan-background span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    font-size: 100px;
+    font-style: italic;
+    font-weight: bold;
+    animation-name: headeranim;
+    animation-direction: alternate;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes headeranim {
+    0%   { color: red; }
+    25%  { color: orange; }
+    75%  { color: yellow; }
+    100% { color: green; }
+}
+
+  .content {
+    text-align: center;
+    margin: 30px 20px;
+    font-size: 30px;
+  }
+
+  .content p {
+    font-size: 20px;
+  }
+
+  .image-container img {
+    margin: 10px;
+  }
+
+  footer {
+    font-size: 20px;
+    text-align: center;
+    margin: 15px;
+  }
+
+  .admin-container {
+    height: 300px; 
+    text-align: center;
+    display: flex; 
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .admin-container>div {
+    width: 48%; 
+    display: inline-block;
+    margin: 15px 0;
+  }
+
+  .my-btn {
+    border: solid 1px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    margin-right: 50px;
+  }
+
+  .load-image {
+    float: right;
+  }
+
+  .img-load-div {
+    width: 100%;
+    display: block;
+  }
+
+  .form-control {
+    width: 80%;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  hr {
+    border-top: solid 2px;
+  }
+  .example_b {
+    width: 80%;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .container-col-lg-5-padding {
+    margin: 10px;
+    padding: 10px;
+  }
